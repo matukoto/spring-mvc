@@ -1,7 +1,9 @@
 package com.example.mvccontroller.controller;
 
-import com.example.mvccontroller.model.User;
+import com.example.mvccontroller.model.Inquiry;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,18 +11,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/form")
-    private String readForm(@ModelAttribute User user) {
-        return "form";
+    @GetMapping("/")
+    private String readForm(@ModelAttribute Inquiry inquiry) {
+        return "index";
     }
 
-    @PostMapping("/form")
-    private String confirm(@ModelAttribute User user) {
+    @PostMapping("/")
+    private String confirm(@Validated @ModelAttribute Inquiry inquiry, BindingResult result) {
 
-        /* @ModelAttriubute リクエストと一致するものがモデルへ流しこまれる（データバインディング）
-           本来ならここで model.addAttribute("user", user); としてモデルに登録する必要がある
-         */
-        return "confirm";
+        if (result.hasErrors()) {
+            return "index";
+        }
+        return "cofirm";
+
     }
 
 }
