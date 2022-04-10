@@ -16,9 +16,8 @@ public class HomeController {
 
     @PostMapping("/form")
     private String confirm(@ModelAttribute User user) {
-
-        /* @ModelAttriubute リクエストと一致するものがモデルへ流しこまれる（データバインディング）
-           本来ならここで model.addAttribute("user", user); としてモデルに登録する必要がある
+        /**
+         *  dev1
          */
         return "confirm";
     }
